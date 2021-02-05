@@ -1,0 +1,12 @@
+name: Jiyuuhome
+version: 1.0-SNAPSHOT
+main: jp.yoppykun.jiyuuserver.jiyuuhome.jiyuuhome.Jiyuuhome
+api-version: 1.16
+authors: [ Yoppykun ]
+description: 自由サーバーのhomePlugin
+website: https://www.jiyuuserver.net
+commands:
+  sethome:
+    description: Jiyuu Home Set
+  home:
+    description: Jiyuu Home Teleport
