@@ -13,6 +13,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 
 public final class Jiyuuhome extends JavaPlugin {
+    String homesetmsg="ホーム地点を設定しました。";
+    String nohomemsg="ホーム地点が設定されていません。";
+    String hometpmsg="ホーム地点にテレポートしました。";
     @Override
     public void onEnable() {
         this.saveDefaultConfig();
@@ -20,46 +23,35 @@ public final class Jiyuuhome extends JavaPlugin {
     }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        /*FileConfiguration setting = YamlConfiguration.loadConfiguration(new File(getDataFolder(),"setting.yml"));
-        getLogger().info(setting..toString());*/
         FileConfiguration config = this.getConfig();
         Player player = (Player)sender;
         if (command.getName().equals("sethome")) {
-                Location loc = player.getLocation();
-                config.set("Homes.Homedate." + player.getUniqueId().toString() + ".X", player.getLocation().getX());
-                config.set("Homes.Homedate." + player.getUniqueId().toString() + ".Y", player.getLocation().getY());
-                config.set("Homes.Homedate." + player.getUniqueId().toString() + ".Z", player.getLocation().getZ());
-                config.set("Homes.Homedate." + player.getUniqueId().toString() + ".World", player.getLocation().getWorld().getName());
+                config.set("Homes." + player.getUniqueId().toString() + ".X", player.getLocation().getX());
+                config.set("Homes." + player.getUniqueId().toString() + ".Y", player.getLocation().getY());
+                config.set("Homes." + player.getUniqueId().toString() + ".Z", player.getLocation().getZ());
+                config.set("Homes." + player.getUniqueId().toString() + ".World", player.getLocation().getWorld().getName());
                 saveConfig();
                 reloadConfig();
-                //セットメッセージ
-                player.sendMessage("§6homeをセットしました!");
+                player.sendMessage(homesetmsg);
         } else if (command.getName().equals("home")) {
-            if (!config.contains("Homes.Homedate."+player.getUniqueId().toString()+".X")){
-                //見つからないときのメッセージ
-                player.sendMessage("§4homeが見つかりませんでした");
+            if (!config.contains("Homes."+player.getUniqueId().toString()+".X")){
+                player.sendMessage(nohomemsg);
             } else{
                 Location loc=new Location(
-                        Bukkit.getWorld(config.getString("Homes.Homedate." + player.getUniqueId().toString() + ".World", player.getLocation().getWorld().getName())),
-                        config.getDouble("Homes.Homedate." + player.getUniqueId().toString() + ".X"),
-                        config.getDouble("Homes.Homedate." + player.getUniqueId().toString() + ".Y"),
-                        config.getDouble("Homes.Homedate." + player.getUniqueId().toString() + ".Z"),
+                        Bukkit.getWorld(config.getString("Homes." + player.getUniqueId().toString() + ".World", player.getLocation().getWorld().getName())),
+                        config.getDouble("Homes." + player.getUniqueId().toString() + ".X"),
+                        config.getDouble("Homes." + player.getUniqueId().toString() + ".Y"),
+                        config.getDouble("Homes." + player.getUniqueId().toString() + ".Z"),
                         player.getLocation().getYaw(),
                         player.getLocation().getPitch()
                 );
                 player.teleport(loc);
-                //音声
                 if (false){
                     player.playSound(loc,Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
                 }
-                //tpメッセージ
-                player.sendMessage("§6Homeにテレポートしました!");
+                player.sendMessage(hometpmsg);
                 }
         }
         return true;
     }
-    /*@Override
-    public void onDisable() {
-        // Plugin shutdown logic
-    }*/
 }
