@@ -1,4 +1,4 @@
-name: Jiyuuhome
+name: HeyHome
 version: ${project.version}
 main: jp.yoppykun.jiyuuserver.jiyuuhome.jiyuuhome.Jiyuuhome
 api-version: 1.16
@@ -10,3 +10,5 @@ commands:
     description: Jiyuu Home Set
   home:
     description: Jiyuu Home Teleport
+  delhome:
+    description: Jiyuu Home Delate
