@@ -11,4 +11,4 @@ commands:
   home:
     description: Jiyuu Home Teleport
   delhome:
-    description: Jiyuu Home Delate
+    description: Jiyuu Home Delates

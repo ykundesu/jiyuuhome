@@ -89,7 +89,7 @@ public final class Jiyuuhome extends JavaPlugin {
                 player.sendMessage(nohomemsg);
             } else {
                 Location loc = new Location(
-                        Bukkit.getWorld(config.getString("Homes." + player.getUniqueId().toString() + args[0] + ".World", player.getLocation().getWorld().getName())),
+                        Bukkit.getWorld(config.getString("Homes." + player.getUniqueId().toString() +"."+ args[0] + ".World", player.getLocation().getWorld().getName())),
                         config.getDouble("Homes." + player.getUniqueId().toString() +"."+args[0] +".X"),
                         config.getDouble("Homes." + player.getUniqueId().toString() +"."+args[0] + ".Y"),
                         config.getDouble("Homes." + player.getUniqueId().toString() +"."+args[0] +".Z"),
