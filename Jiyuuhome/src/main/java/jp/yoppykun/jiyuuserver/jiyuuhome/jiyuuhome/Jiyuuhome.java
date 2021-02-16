@@ -55,10 +55,11 @@ public final class Jiyuuhome extends JavaPlugin {
                     config.set("Homes." + player.getUniqueId().toString() +"."+args[0] + ".Y", player.getLocation().getY());
                     config.set("Homes." + player.getUniqueId().toString() +"."+args[0] + ".Z", player.getLocation().getZ());
                     int homen=config.getInt("Homes." + player.getUniqueId().toString() + ".homesets") + 1;
+                    //if(config.contains("Homes."+player.getUniqueId()+".homedate."+homen)){homen=homen+100;}
                     config.set("Homes." + player.getUniqueId().toString() +"."+args[0] + ".World", player.getLocation().getWorld().getName());
                     config.set("Homes." + player.getUniqueId().toString() + ".homesets",homen);
-                    config.set("Homes." + player.getUniqueId().toString() + ".homedate." +homen, args[0]);
-                    config.set("Homes." + player.getUniqueId().toString() + "."+args[0] + ".homen",config.getInt("Homes." + player.getUniqueId().toString() + ".homesets") + 1);
+                    //config.set("Homes." + player.getUniqueId().toString() + ".homedate." +homen, args[0]);
+                    //config.set("Homes." + player.getUniqueId().toString() + "."+args[0] + ".homen",config.getInt("Homes." + player.getUniqueId().toString() + ".homesets") + 1);
                     saveConfig();
                     reloadConfig();
                     player.sendMessage(homesetmsg);
@@ -113,15 +114,22 @@ public final class Jiyuuhome extends JavaPlugin {
             }else{
                 config.set("Homes." + player.getUniqueId().toString() + "."+args[0],null);
                 config.set("Homes." + player.getUniqueId().toString() + ".homesets",config.getInt("Homes." + player.getUniqueId().toString() + ".homesets")-1);
-                int homen=config.getInt("Homes." + player.getUniqueId().toString() + ".homesets") + 1;
-                config.set("Homes." + player.getUniqueId().toString() + ".homedate." +homen,null);
+                //int homen=config.getInt("Homes." + player.getUniqueId().toString() + ".homesets") + 1;
+                //config.set("Homes." + player.getUniqueId().toString() + ".homedate." +homen,null);
                 saveConfig();
                 reloadConfig();
                 player.sendMessage(delhomeok);
             }
         }
-        }/*else if(command.getName().equals("homelist")){
-            player.sendMessage("あなたが登録しているホーム:");
+        }else if(command.getName().equals("homelist")){
+            sender.sendMessage("登録しているホーム:");
+            for (String key : config.getConfigurationSection("Homes."+player.getUniqueId().toString()).getKeys(false)) {
+                //sender.sendMessage("key:"+key);
+                if(config.contains("Homes."+player.getUniqueId().toString()+"."+key+".X")){
+                    sender.sendMessage(key);
+                }
+            }
+            /*player.sendMessage("あなたが登録しているホーム:");
             String num="1";
             if(config.contains("Homes." + player.getUniqueId().toString() + ".homedate."+num)) {
                 player.sendMessage(config.getString("Homes." + player.getUniqueId().toString() + ".homedate."+num));
@@ -138,7 +146,7 @@ public final class Jiyuuhome extends JavaPlugin {
             if(config.contains("Homes." + player.getUniqueId().toString() + ".homedate."+num)) {
                 player.sendMessage(config.getString("Homes." + player.getUniqueId().toString() + ".homedate."+num));
             }
-        }*/
+        */}
         return true;
     }
 }
