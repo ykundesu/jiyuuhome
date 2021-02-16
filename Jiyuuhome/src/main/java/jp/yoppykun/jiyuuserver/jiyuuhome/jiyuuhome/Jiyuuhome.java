@@ -122,13 +122,14 @@ public final class Jiyuuhome extends JavaPlugin {
             }
         }
         }else if(command.getName().equals("homelist")){
+            if(!config.contains("Homes."+player.getUniqueId().toString())){sender.sendMessage("ホームが設定されていません。");}else{
             sender.sendMessage("登録しているホーム:");
             for (String key : config.getConfigurationSection("Homes."+player.getUniqueId().toString()).getKeys(false)) {
                 //sender.sendMessage("key:"+key);
                 if(config.contains("Homes."+player.getUniqueId().toString()+"."+key+".X")){
                     sender.sendMessage(key);
                 }
-            }
+            }}
             /*player.sendMessage("あなたが登録しているホーム:");
             String num="1";
             if(config.contains("Homes." + player.getUniqueId().toString() + ".homedate."+num)) {
